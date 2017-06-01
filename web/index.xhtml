@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <meta charset="utf-8"/>
@@ -26,19 +27,35 @@
     <h:body>
         Hello from Facelets
 
-        #{acBean.json}
+       
         <p>
             <h:form>    
-                <script type="text/javascript">
+                <h:panelGroup layout="block" id="david">
+                      <script type="text/javascript">
                     var vaiviado = function () {
                         $('.typeahead').typeahead({
                             source: #{acBean.json},
-                            displayField: 'nome'
-                        });
-                    };
+                            displayField: 'nome',
+                             onSelect: function(item) {
+                                    console.log(item);
+                             }
+                    });
+        };
                 </script>
-                <h:inputText styleClass="typeahead" onfocus="vaiviado()" />
-
+                    #{acBean.json}
+              
+                </h:panelGroup>
+                
+                <h:panelGroup layout="block" id="group">
+                 
+                    <h:inputText id="inputeu" styleClass="typeahead" onfocus="vaiviado()" >
+                        <f:ajax event="keyup" onevent="vaiviado()" execute="inputeu" render="david" listener="#{acBean.add(evt)}"/>
+                </h:inputText>
+            </h:panelGroup>
+                <h:commandButton value="butao" >
+                 
+                </h:commandButton>        
+                
             </h:form>
         </p>    
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -61,6 +62,11 @@ public class AcBean {
         list = new ArrayList<>();
         list.add(j1);list.add(j2);list.add(j3);
         
+    }
+    
+    
+    public void add(ActionEvent evt){
+        list.add(new Json("David zé ruela", "24"));
     }
     
     public String getJson(){
